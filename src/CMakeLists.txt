@@ -1,6 +1,15 @@
 add_library(
     sketchescore
     SHARED
+    murmur3.cpp
+    cpc/cpc_sketch.cpp
+    cpc/fm85.c
+    cpc/fm85Compression.c
+    cpc/fm85Confidence.c
+    cpc/fm85Merging.c
+    cpc/fm85Util.c
+    cpc/iconEstimator.c
+    cpc/u32Table.c
     hll/AuxHashMap.cpp
     hll/CompositeInterpolationXTable.cpp
     hll/Conversions.cpp
@@ -19,5 +28,4 @@ add_library(
     hll/HllUtil.cpp
     hll/IntArrayPairIterator.cpp
     hll/RelativeErrorTables.cpp
-    hll/murmur3.cpp
 )

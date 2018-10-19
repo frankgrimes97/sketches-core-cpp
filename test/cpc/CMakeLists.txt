@@ -1,0 +1,12 @@
+add_library(
+    cpctest
+    SHARED
+    compression_test.cpp
+    cpc_sketch_test.cpp
+    cpc_union_test.cpp
+)
+target_link_libraries(
+    cpctest
+    sketchescore
+    cppunit
+)

@@ -3,13 +3,20 @@ set(PROJECT_NAME sketches-core-cpp)
 set(RELEASE_DATE 2018-10-18)
 project(${PROJECT_NAME})
 
-add_compile_options(-c -g -Wall -O0 -std=c++11)
+if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+  set(CMAKE_MACOSX_RPATH 1) # Not needed if Cmake minimum version is 3.0 but that means we can't build on Centos7 out-of-the-box
+endif()
+
+add_compile_options(-c -g -Wall -O2)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake")
 find_package(cppunit REQUIRED)
 
 include_directories(
+    include
+    include/cpc
     include/hll
     include/kll
 )
