@@ -171,7 +171,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     const int n(1000000);
     for (int i = 0; i < n; i++) {
       sketch.update(i);
-      CPPUNIT_ASSERT_EQUAL((unsigned long long) i + 1, sketch.get_n());
+      CPPUNIT_ASSERT_EQUAL((uint64_t) i + 1, sketch.get_n());
     }
     CPPUNIT_ASSERT(!sketch.is_empty());
     CPPUNIT_ASSERT(sketch.is_estimation_mode());
