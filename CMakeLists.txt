@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 set(PROJECT_NAME sketches-core-cpp)
 set(RELEASE_DATE 2018-10-18)
 project(${PROJECT_NAME})
