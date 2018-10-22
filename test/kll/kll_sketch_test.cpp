@@ -99,7 +99,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     kll_sketch<float> sketch;
     CPPUNIT_ASSERT(sketch.is_empty());
     CPPUNIT_ASSERT(!sketch.is_estimation_mode());
-    CPPUNIT_ASSERT_EQUAL(0ull, sketch.get_n());
+    CPPUNIT_ASSERT_EQUAL((uint64_t) 0, sketch.get_n());
     CPPUNIT_ASSERT_EQUAL(0u, sketch.get_num_retained());
     CPPUNIT_ASSERT(std::isnan(sketch.get_rank(0)));
     CPPUNIT_ASSERT(std::isnan(sketch.get_min_value()));
@@ -123,7 +123,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     sketch.update(1);
     CPPUNIT_ASSERT(!sketch.is_empty());
     CPPUNIT_ASSERT(!sketch.is_estimation_mode());
-    CPPUNIT_ASSERT_EQUAL(1ull, sketch.get_n());
+    CPPUNIT_ASSERT_EQUAL((uint64_t) 1, sketch.get_n());
     CPPUNIT_ASSERT_EQUAL(1u, sketch.get_num_retained());
     CPPUNIT_ASSERT_EQUAL(0.0, sketch.get_rank(1));
     CPPUNIT_ASSERT_EQUAL(1.0, sketch.get_rank(2));
@@ -234,7 +234,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     auto sketch_ptr(kll_sketch<float>::deserialize(is));
     CPPUNIT_ASSERT(!sketch_ptr->is_empty());
     CPPUNIT_ASSERT(sketch_ptr->is_estimation_mode());
-    CPPUNIT_ASSERT_EQUAL(1000000ull, sketch_ptr->get_n());
+    CPPUNIT_ASSERT_EQUAL((uint64_t) 1000000, sketch_ptr->get_n());
     CPPUNIT_ASSERT_EQUAL(614u, sketch_ptr->get_num_retained());
     CPPUNIT_ASSERT_EQUAL(0.0f, sketch_ptr->get_min_value());
     CPPUNIT_ASSERT_EQUAL(999999.0f, sketch_ptr->get_max_value());
@@ -268,7 +268,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     CPPUNIT_ASSERT_EQUAL(s.tellp(), s.tellg());
     CPPUNIT_ASSERT(!sketch_ptr->is_empty());
     CPPUNIT_ASSERT(!sketch_ptr->is_estimation_mode());
-    CPPUNIT_ASSERT_EQUAL(1ull, sketch_ptr->get_n());
+    CPPUNIT_ASSERT_EQUAL((uint64_t) 1, sketch_ptr->get_n());
     CPPUNIT_ASSERT_EQUAL(1u, sketch_ptr->get_num_retained());
     CPPUNIT_ASSERT_EQUAL(1.0f, sketch_ptr->get_min_value());
     CPPUNIT_ASSERT_EQUAL(1.0f, sketch_ptr->get_max_value());
@@ -284,7 +284,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     auto sketch_ptr(kll_sketch<float>::deserialize(is));
     CPPUNIT_ASSERT(!sketch_ptr->is_empty());
     CPPUNIT_ASSERT(!sketch_ptr->is_estimation_mode());
-    CPPUNIT_ASSERT_EQUAL(1ull, sketch_ptr->get_n());
+    CPPUNIT_ASSERT_EQUAL((uint64_t) 1, sketch_ptr->get_n());
     CPPUNIT_ASSERT_EQUAL(1u, sketch_ptr->get_num_retained());
     CPPUNIT_ASSERT_EQUAL(1.0f, sketch_ptr->get_min_value());
     CPPUNIT_ASSERT_EQUAL(1.0f, sketch_ptr->get_max_value());
@@ -356,7 +356,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     sketch1.merge(sketch2);
 
     CPPUNIT_ASSERT(!sketch1.is_empty());
-    CPPUNIT_ASSERT_EQUAL(2ull * n, sketch1.get_n());
+    CPPUNIT_ASSERT_EQUAL((uint64_t) 2 * n, sketch1.get_n());
     CPPUNIT_ASSERT_EQUAL(0.0f, sketch1.get_min_value());
     CPPUNIT_ASSERT_EQUAL(2.0f * n - 1, sketch1.get_max_value());
     CPPUNIT_ASSERT_DOUBLES_EQUAL(n, sketch1.get_quantile(0.5), n * RANK_EPS_FOR_K_200);
@@ -386,7 +386,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     CPPUNIT_ASSERT_EQUAL(sketch1.get_normalized_rank_error(true), sketch2.get_normalized_rank_error(true));
 
     CPPUNIT_ASSERT(!sketch1.is_empty());
-    CPPUNIT_ASSERT_EQUAL(2ull * n, sketch1.get_n());
+    CPPUNIT_ASSERT_EQUAL((uint64_t) 2 * n, sketch1.get_n());
     CPPUNIT_ASSERT_EQUAL(0.0f, sketch1.get_min_value());
     CPPUNIT_ASSERT_EQUAL(2.0f * n - 1, sketch1.get_max_value());
     CPPUNIT_ASSERT_DOUBLES_EQUAL(n, sketch1.get_quantile(0.5), n * RANK_EPS_FOR_K_200);
