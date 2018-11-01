@@ -33,12 +33,12 @@ set(
 # this is the "object library" target: compiles the sources only once
 add_library(objlib OBJECT ${libsrc})
 
-# shared libraries need PIC
-set_property(TARGET objlib PROPERTY POSITION_INDEPENDENT_CODE 1)
-
 # shared and static libraries built from the same object files
 add_library(sketchescore_shared SHARED $<TARGET_OBJECTS:objlib>)
 add_library(sketchescore_static STATIC $<TARGET_OBJECTS:objlib>)
+
+target_link_libraries(sketchescore_shared)
+target_link_libraries(sketchescore_static)
 
 SET_TARGET_PROPERTIES(sketchescore_static PROPERTIES
    OUTPUT_NAME sketchescore CLEAN_DIRECT_OUTPUT 1)
