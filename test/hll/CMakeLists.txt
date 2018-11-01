@@ -14,7 +14,7 @@ add_library(
 )
 target_link_libraries(
     hlltest
-    sketchescore
+    sketchescore_shared
     cppunit
 )
 

@@ -4,7 +4,6 @@ set(RELEASE_DATE 2018-10-18)
 project(${PROJECT_NAME})
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-  set(CMAKE_MACOSX_RPATH 1) # Not needed if Cmake minimum version is 3.0 but that means we can't build on Centos7 out-of-the-box
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")

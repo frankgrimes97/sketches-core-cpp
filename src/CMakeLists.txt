@@ -40,11 +40,19 @@ add_library(sketchescore_static STATIC $<TARGET_OBJECTS:objlib>)
 target_link_libraries(sketchescore_shared)
 target_link_libraries(sketchescore_static)
 
-SET_TARGET_PROPERTIES(sketchescore_static PROPERTIES
-   OUTPUT_NAME sketchescore CLEAN_DIRECT_OUTPUT 1)
+SET_TARGET_PROPERTIES(
+   sketchescore_static
+   PROPERTIES
+   OUTPUT_NAME sketchescore
+   CLEAN_DIRECT_OUTPUT ON
+)
 
-SET_TARGET_PROPERTIES(sketchescore_shared PROPERTIES
-   OUTPUT_NAME sketchescore CLEAN_DIRECT_OUTPUT 1)
+SET_TARGET_PROPERTIES(
+   sketchescore_shared
+   PROPERTIES
+   OUTPUT_NAME sketchescore
+   CLEAN_DIRECT_OUTPUT ON
+)
 
 install(
   TARGETS sketchescore_shared sketchescore_static

@@ -6,6 +6,6 @@ add_library(
 )
 target_link_libraries(
     klltest
-    sketchescore
+    sketchescore_shared
     cppunit
 )

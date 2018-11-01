@@ -7,6 +7,6 @@ add_library(
 )
 target_link_libraries(
     cpctest
-    sketchescore
+    sketchescore_shared
     cppunit
 )
