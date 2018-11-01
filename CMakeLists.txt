@@ -5,13 +5,15 @@ project(${PROJECT_NAME})
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   set(CMAKE_MACOSX_RPATH 1) # Not needed if Cmake minimum version is 3.0 but that means we can't build on Centos7 out-of-the-box
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+else()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 endif()
 
 link_directories("/usr/local/lib")
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_compile_options(-c -g -Wall -O3)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake")

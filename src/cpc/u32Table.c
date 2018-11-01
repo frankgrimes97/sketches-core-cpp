@@ -5,6 +5,7 @@
 
 // author Kevin Lang, Oath Research
 
+#include "inttypes.h"
 #include "common.h"
 #include "u32Table.h"
 #include "fm85Util.h"
@@ -55,7 +56,7 @@ void u32TableFree (u32Table * self) {
 
 void u32TableShow (u32Table * self) {
   Long tableSize = 1LL << self->lgSize;
-  printf ("\nu32Table (%d valid bits; %lld of %lld slots occupied)\n",
+  printf ("\nu32Table (%d valid bits; %" PRId64 " of %" PRId64 " slots occupied)\n",
 	  self->validBits, self->numItems, tableSize);
   //  U32 * arr = self->slots;
   //  Long i;
@@ -80,7 +81,7 @@ void u32TableClear (u32Table * self) { // clear the table without resizing it
 
 void printU32Array (U32 * array, Long arrayLength) {
   Long i = 0;
-  printf ("\nu32Array [%lld]\n", arrayLength);
+  printf ("\nu32Array [%" PRId64 "]\n", arrayLength);
   for (i = 0; i < arrayLength; i++) {
     printf ("%d:\t%8X\n", (int) i, array[i]);    
   }
@@ -138,7 +139,7 @@ void privateU32TableRebuild (u32Table * self, Short newLgSize) {
   assert (newLgSize >= 2);
   Long newSize = (1LL << newLgSize);
   Long oldSize = (1LL << self->lgSize);
-  //  printf ("rebuilding: %lld -> %lld; %lld items in table\n", oldSize, newSize, self->numItems); fflush (stdout);
+  //  printf ("rebuilding: %" PRId64 " -> %" PRId64 "; %" PRId64 " items in table\n", oldSize, newSize, self->numItems); fflush (stdout);
   assert (newSize > self->numItems); // TODO
   U32 * oldSlots = self->slots;
   U32 * newSlots = (U32 *) malloc ((size_t) (newSize * sizeof(U32)));
@@ -302,7 +303,7 @@ void introspectiveInsertionSort(U32 a[], Long l, Long r) // r points AT the righ
 }
 
 
-//  printf ("cost was %lld (arrlen=%lld)\n", cost, length); fflush (stdout);
+//  printf ("cost was %" PRId64 " (arrlen=%" PRId64 ")\n", cost, length); fflush (stdout);
 
 
 /******************************************************/

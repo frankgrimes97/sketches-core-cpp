@@ -131,7 +131,7 @@ class HllUnionTest : public CppUnit::TestFixture {
     }
   }
 
-  void basicUnion(int n1, int n2, int lgk1, int lgk2, int lgMaxK,
+  void basicUnion(uint64_t n1, uint64_t n2, int lgk1, int lgk2, int lgMaxK,
                   TgtHllType type1, TgtHllType type2, TgtHllType resultType) {
     uint64_t v = 0;
     //int tot = n1 + n2;

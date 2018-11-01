@@ -502,7 +502,7 @@ class kll_sketch_test: public CppUnit::TestFixture {
     sketch.serialize(os);
 
     // debug print
-    std::cout << sketch;
+    //std::cout << sketch;
   }
 
 };

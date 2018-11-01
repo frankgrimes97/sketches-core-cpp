@@ -94,15 +94,15 @@ uint8_t HllSketchImpl::makeModeByte() const {
   uint8_t byte;
 
   switch (curMode) {
-  case LIST:
-    byte = 0;
-    break;
   case SET:
     byte = 1;
     break;
   case HLL:
     byte = 2;
     break;
+  case LIST:
+  default:
+    byte = 0;
   }
 
   switch (tgtHllType) {
