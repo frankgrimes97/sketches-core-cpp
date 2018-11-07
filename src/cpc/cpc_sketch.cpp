@@ -18,7 +18,6 @@ std::ostream& operator<<(std::ostream& os, cpc_sketch const& sketch) {
   os << "   compressed     : " << (sketch.state->isCompressed ? "true" : "false") << std::endl;
   os << "   intresting col : " << sketch.state->firstInterestingColumn << std::endl;
   os << "   HIP estimate   : " << sketch.state->hipEstAccum << std::endl;
-  //os << "   HIP error      : " << sketch.state->hipErrAccum << std::endl;
   os << "   kxp            : " << sketch.state->kxp << std::endl;
   if (sketch.state->isCompressed) {
     os << "   num CSV        : " << sketch.state->numCompressedSurprisingValues << std::endl;
@@ -34,6 +33,10 @@ std::ostream& operator<<(std::ostream& os, cpc_sketch const& sketch) {
   }
   os << "### End sketch summary" << std::endl;
   return os;
+}
+
+void cpc_cleanup() {
+  fm85Clean();
 }
 
 } /* namespace datasketches */

@@ -16,6 +16,7 @@ extern "C" {
 #include "fm85Compression.h"
 #include "iconEstimator.h"
 #include "fm85Confidence.h"
+#include "fm85Util.h"
 
 }
 
@@ -249,6 +250,15 @@ class cpc_sketch {
       return state->numCoupons;
     }
 
+    // for debugging
+    // this should catch some forms of corruption during serialization-deserialization
+    bool validate() const {
+      U64* bit_matrix = bitMatrixOfSketch(state);
+      const long long num_bits_set = countBitsSetInMatrix(bit_matrix, 1LL << state->lgK);
+      fm85free(bit_matrix);
+      return num_bits_set == state->numCoupons;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, cpc_sketch const& sketch);
 
     friend class cpc_union;
@@ -297,6 +307,9 @@ class cpc_sketch {
     }
 
 };
+
+// optional deallocation of globally allocated compression tables
+void cpc_cleanup();
 
 } /* namespace datasketches */
 
