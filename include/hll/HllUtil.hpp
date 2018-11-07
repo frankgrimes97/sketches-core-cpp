@@ -13,7 +13,6 @@
 #include <exception>
 #include <string>
 #include <sstream>
-#include <stdexcept>
 
 namespace datasketches {
 
