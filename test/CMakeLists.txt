@@ -1,6 +1,5 @@
 add_subdirectory(cpc)
 add_subdirectory(hll)
-add_subdirectory(kll)
 
 add_executable(
     test_runner
@@ -11,7 +10,6 @@ target_link_libraries(
     sketchescore_shared
     cpctest
     hlltest
-    klltest
     cppunit
 )
 add_custom_target(tests COMMENT "Running CPPUNIT tests...")
@@ -20,5 +18,4 @@ add_custom_command(
   TARGET test_runner POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/cpc/*.txt ${CMAKE_CURRENT_BINARY_DIR}/cpc/
   COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/hll/*.bin ${CMAKE_CURRENT_BINARY_DIR}/hll/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/kll/*.bin ${CMAKE_CURRENT_BINARY_DIR}/kll/
 )
