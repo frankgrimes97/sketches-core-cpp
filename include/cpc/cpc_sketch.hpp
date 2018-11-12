@@ -40,7 +40,6 @@ class cpc_sketch {
   public:
 
     explicit cpc_sketch(uint8_t lg_k, uint64_t seed = DEFAULT_SEED, void* (*alloc)(size_t) = &malloc, void (*dealloc)(void*) = &free) : seed(seed) {
-      fm85InitAD(alloc, dealloc);
       if (lg_k < CPC_MIN_LG_K or lg_k > CPC_MAX_LG_K) {
         throw std::invalid_argument("lg_k must be >= " + std::to_string(CPC_MIN_LG_K) + " and <= " + std::to_string(CPC_MAX_LG_K) + ": " + std::to_string(lg_k));
       }
@@ -116,7 +115,7 @@ class cpc_sketch {
         | (has_window ? 1 << flags::HAS_WINDOW : 0)
       );
       os.write((char*)&flags_byte, sizeof(flags_byte));
-      const uint16_t seed_hash(compute_seed_hash(seed));
+      const uint16_t seed_hash = 0;
       os.write((char*)&seed_hash, sizeof(seed_hash));
       if (!is_empty()) {
         const uint32_t num_coupons(compressed->numCoupons);
@@ -151,7 +150,6 @@ class cpc_sketch {
 
     static cpc_sketch_unique_ptr
     deserialize(std::istream& is, uint64_t seed = DEFAULT_SEED, void* (*alloc)(size_t) = &malloc, void (*dealloc)(void*) = &free) {
-      fm85InitAD(alloc, dealloc);
       uint8_t preamble_ints;
       is.read((char*)&preamble_ints, sizeof(preamble_ints));
       uint8_t serial_version;
@@ -230,10 +228,6 @@ class cpc_sketch {
       if (family_id != FAMILY) {
         throw std::invalid_argument("Possible corruption: family: expected "
             + std::to_string(FAMILY) + ", got " + std::to_string(family_id));
-      }
-      if (seed_hash != compute_seed_hash(seed)) {
-        throw std::invalid_argument("Incompatible seed hashes: " + std::to_string(seed_hash) + ", "
-            + std::to_string(compute_seed_hash(seed)));
       }
       FM85* uncompressed = fm85Uncompress(&compressed);
       delete [] compressed.compressedSurprisingValues;

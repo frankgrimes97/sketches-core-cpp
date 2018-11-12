@@ -37,7 +37,6 @@ UG85* ug85Copy(UG85* other) {
 class cpc_union {
   public:
     explicit cpc_union(uint8_t lg_k, uint64_t seed = DEFAULT_SEED, void* (*alloc)(size_t) = &malloc, void (*dealloc)(void*) = &free) : seed(seed) {
-      fm85InitAD(alloc, dealloc);
       if (lg_k < CPC_MIN_LG_K or lg_k > CPC_MAX_LG_K) {
         throw std::invalid_argument("lg_k must be >= " + std::to_string(CPC_MIN_LG_K) + " and <= " + std::to_string(CPC_MAX_LG_K) + ": " + std::to_string(lg_k));
       }
@@ -60,12 +59,6 @@ class cpc_union {
     }
 
     void update(const cpc_sketch& sketch) {
-      const uint16_t seed_hash_union = compute_seed_hash(seed);
-      const uint16_t seed_hash_sketch = compute_seed_hash(sketch.seed);
-      if (seed_hash_union != seed_hash_sketch) {
-        throw std::invalid_argument("Incompatible seed hashes: " + std::to_string(seed_hash_union) + ", "
-            + std::to_string(seed_hash_sketch));
-      }
       ug85MergeInto(state, sketch.state);
     }
 

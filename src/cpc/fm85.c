@@ -34,13 +34,6 @@ Boolean fm85Initialized = 0;
 void* (*fm85alloc)(size_t);
 void (*fm85free)(void*);
 
-// This stuff would be handled by Java's mechanism
-// for initializing class variables.
-
-void fm85Init (void) {
-  fm85InitAD(&malloc, &free);
-}
-
 // This is to support custom allocator and deallocator
 void fm85InitAD (void* (*alloc)(size_t), void (*dealloc)(void*)) {
   if (!fm85Initialized) {
@@ -55,7 +48,13 @@ void fm85InitAD (void* (*alloc)(size_t), void (*dealloc)(void*)) {
   }
 }
 
-void fm85Clean (void) {
+__attribute__((constructor)) void fm85Init (void) {
+  fprintf (stdout, "fm85Init called\n");
+  fm85InitAD(&malloc, &free);
+}
+
+__attribute__((destructor)) void fm85Clean (void) {
+  fprintf (stdout, "fm85Clean called\n");
   freeTheDecodingTables();
   fm85Initialized = 0;
 }
