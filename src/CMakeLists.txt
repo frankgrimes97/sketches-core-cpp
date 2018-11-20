@@ -1,7 +1,6 @@
 # list of source files
 set(
   libsrc
-  murmur3.cpp
   cpc/cpc_sketch.cpp
   cpc/fm85.c
   cpc/fm85Compression.c

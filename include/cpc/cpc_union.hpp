@@ -59,6 +59,12 @@ class cpc_union {
     }
 
     void update(const cpc_sketch& sketch) {
+      const uint16_t seed_hash_union = compute_seed_hash(seed);
+      const uint16_t seed_hash_sketch = compute_seed_hash(sketch.seed);
+      if (seed_hash_union != seed_hash_sketch) {
+        throw std::invalid_argument("Incompatible seed hashes: " + std::to_string(seed_hash_union) + ", "
+            + std::to_string(seed_hash_sketch));
+      }
       ug85MergeInto(state, sketch.state);
     }
 

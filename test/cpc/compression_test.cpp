@@ -23,22 +23,18 @@ class compression_test: public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE_END();
 
 public:
-  void setUp() {
-    fm85Init();
-  }
-
   void compress_and_uncompress_pairs() {
     const int N = 200;
     const int MAXWORDS = 1000;
 
-    U64 twoHashes[2];
+    HashState twoHashes;
     U32 pairArray[N];
     U32 pairArray2[N];
     U64 value = 35538947; // some arbitrary starting value
     const U64 golden64 = 0x9e3779b97f4a7c13ULL;  // the golden ratio
     for (int i = 0; i < N; i++) {
       MurmurHash3_x64_128(&value, sizeof(value), 0, twoHashes);
-      U32 rand = twoHashes[0] & 0xffff;
+      U32 rand = twoHashes.h1 & 0xffff;
       pairArray[i] = rand;
       value += golden64;
     }

@@ -47,7 +47,7 @@ HllArray::HllArray(const HllArray& that)
 }
 
 HllArray::~HllArray() {
-  delete hllByteArr;
+  delete [] hllByteArr;
 }
 
 HllArray* HllArray::copyAs(const TgtHllType tgtHllType) const {
